@@ -14,7 +14,6 @@ def main():
     print(f"Random result is {random_result}")
 
 
-
 def determine_result(score):
     if score < 0 or score > 100:
         return "Invalid score"
@@ -25,4 +24,5 @@ def determine_result(score):
     return "Bad"
 
 
-main()
+if __name__ == '__main__':
+    main()
