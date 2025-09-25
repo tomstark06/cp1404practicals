@@ -1,3 +1,5 @@
+"""Password stars program."""
+
 LENGTH_OF_PASSWORD = 8
 
 
