@@ -1,4 +1,4 @@
-"""List exercises task"""
+"""List exercises task."""
 
 # Basic List Operations
 numbers = []
