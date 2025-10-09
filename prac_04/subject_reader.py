@@ -25,7 +25,7 @@ def load_subject_data(filename=FILENAME):
 
 
 def print_subject_data(subjects):
-    """Print the subject data"""
+    """Print the subject data."""
     for subject in subjects:
         print(f"{subject[0]} is taught by {subject[1]:<12} and has {subject[2]:>3} students")
 
