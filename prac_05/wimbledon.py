@@ -22,7 +22,7 @@ def print_results(champion_to_number_of_wins, winning_countries):
         print(champion, number_of_wins)
     print()
     print(f"These {len(winning_countries)} countries have won Wimbledon:")
-    print(", ".join(winning_countries))
+    print(", ".join(sorted(winning_countries))
 
 
 def process_records(records):
