@@ -16,6 +16,7 @@ def main():
 
 
 def print_results(champion_to_number_of_wins, winning_countries):
+    """Print the results from the processed data."""
     print("Wimbledon Champions:")
     for champion, number_of_wins in champion_to_number_of_wins.items():
         print(champion, number_of_wins)
@@ -25,6 +26,7 @@ def print_results(champion_to_number_of_wins, winning_countries):
 
 
 def process_records(records):
+    """Process the records into dict and set."""
     champion_to_number_of_wins = {}
     winning_countries = set()
     for record in records:
@@ -35,6 +37,7 @@ def process_records(records):
 
 
 def load_records():
+    """Load the records from a file."""
     records = []
     with open(FILENAME, "r", encoding=ENCODING) as in_file:
         in_file.readline()
