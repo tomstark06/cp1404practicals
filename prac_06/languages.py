@@ -1,7 +1,7 @@
 """
 Programming language exercise - client side code
 Estimated time: 20 minutes
-Actual time: 12:10 -
+Actual time: 15 minutes
 """
 
 from prac_06.programming_language import ProgrammingLanguage
