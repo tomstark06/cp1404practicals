@@ -1,4 +1,7 @@
-"""Guitar class definition"""
+"""Guitar class definition
+Estimate: 30 minutes
+Actual:
+"""
 
 CURRENT_YEAR = 2025
 VINTAGE_THRESHOLD = 50
