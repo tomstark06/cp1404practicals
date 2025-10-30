@@ -12,7 +12,7 @@ while name != "":
     guitars.append(guitar_to_add)
     print(guitar_to_add, "added.")
     name = input("Name: ")
-if guitars:
+if guitars:  # If there are no guitars, then don't print the following
     print("These are my guitars:")
     for i, guitar in enumerate(guitars, 1):
         vintage_string = " (vintage)" if guitar.is_vintage() else ""
