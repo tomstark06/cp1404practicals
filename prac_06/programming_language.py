@@ -4,8 +4,9 @@
 class ProgrammingLanguage:
     """Represent a ProgrammingLanguage object."""
 
-    def __init__(self, typing="", is_reflective=False, year=0):
+    def __init__(self, name="", typing="", is_reflective=False, year=0):
         """Initialise a ProgrammingLanguage instance."""
+        self.name= name
         self.typing = typing
         self.is_reflective = is_reflective
         self.year = year
