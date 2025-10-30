@@ -3,6 +3,7 @@
 CURRENT_YEAR = 2025
 VINTAGE_THRESHOLD = 50
 
+
 class Guitar:
     """Represent a Guitar object."""
 
