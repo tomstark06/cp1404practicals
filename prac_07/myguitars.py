@@ -8,6 +8,7 @@ FILENAME = "guitars.csv"
 def main():
     """"""
     guitars = read_file()
+    guitars.sort()
     for guitar in guitars:
         print(guitar)
 
