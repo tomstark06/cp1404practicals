@@ -18,11 +18,13 @@ def main():
     choice = input(">>> ").upper()
     while choice != "Q":
         if choice == "L":
-            print()
+            load_filename = get_valid_filename("Load file name: ")
+            projects = load_projects(load_filename)
+            print(f"Loaded {len(projects)} projects from {load_filename}")
         elif choice == "S":
             print()
         elif choice == "D":
-            print()
+            display_projects(projects)
         elif choice == "F":
             print()
         elif choice == "A":
@@ -36,15 +38,39 @@ def main():
     print()
 
 
-def load_projects():
+def load_projects(filename=FILENAME):
+    """"""
     projects = []
-    with open(FILENAME, "r") as in_file:
+    with open(filename, "r") as in_file:
         in_file.readline()  # Ignore header line
         for line in in_file:
             parts = line.strip("\n").split("\t")
             project = Project(parts[0], parts[1], int(parts[2]), float(parts[3]), int(parts[4]))
             projects.append(project)
     return projects
+
+
+def get_valid_filename(prompt):
+    """"""
+    choice = input(prompt)
+    while choice == "" or "." not in choice:
+        print("Invalid filename")
+        choice = input(prompt)
+    return choice
+
+
+def display_projects(projects):
+    """"""
+    print("Incomplete projects:")
+    incomplete_projects = [project for project in projects if project.completion_percentage != 100]
+    incomplete_projects.sort()
+    for incomplete_project in incomplete_projects:
+        print(f"  {incomplete_project}")
+    print("Complete projects:")
+    complete_projects = [project for project in projects if project.completion_percentage == 100]
+    complete_projects.sort()
+    for complete_project in complete_projects:
+        print(f"  {complete_project}")
 
 
 main()
