@@ -7,22 +7,22 @@ from prac_07.project import Project
 
 MENU = "- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter projects by date\n- (A)dd new project\n- (U)pdate project\n- (Q)uit"
 FILENAME = "projects.txt"
+HEADER_LINE = "Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage"
 
 
 def main():
     """"""
     print("Welcome to Pythonic Project Management")
     projects = load_projects()
-    print(f"Loaded {len(projects)} projects from {FILENAME}")
     print(MENU)
     choice = input(">>> ").upper()
     while choice != "Q":
         if choice == "L":
             load_filename = get_valid_filename("Load file name: ")
             projects = load_projects(load_filename)
-            print(f"Loaded {len(projects)} projects from {load_filename}")
         elif choice == "S":
-            print()
+            save_filename = get_valid_filename("Save file name: ")
+            save_projects(save_filename, projects)
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
@@ -41,13 +41,17 @@ def main():
 def load_projects(filename=FILENAME):
     """"""
     projects = []
-    with open(filename, "r") as in_file:
-        in_file.readline()  # Ignore header line
-        for line in in_file:
-            parts = line.strip("\n").split("\t")
-            project = Project(parts[0], parts[1], int(parts[2]), float(parts[3]), int(parts[4]))
-            projects.append(project)
-    return projects
+    try:
+        with open(filename, "r") as in_file:
+            in_file.readline()  # Ignore header line
+            for line in in_file:
+                parts = line.strip("\n").split("\t")
+                project = Project(parts[0], parts[1], int(parts[2]), float(parts[3]), int(parts[4]))
+                projects.append(project)
+        print(f"Loaded {len(projects)} projects from {filename}")
+        return projects
+    except FileNotFoundError:
+        print("Specified file does not exist, please try again.")
 
 
 def get_valid_filename(prompt):
@@ -57,6 +61,16 @@ def get_valid_filename(prompt):
         print("Invalid filename")
         choice = input(prompt)
     return choice
+
+
+def save_projects(filename, projects):
+    """"""
+    with open(filename, "w") as out_file:
+        print(HEADER_LINE, file=out_file)
+        for project in projects:
+            project_to_save = [project.name, project.start_date, str(project.priority), str(project.cost_estimate), str(project.completion_percentage)]
+            print("\t".join(project_to_save), file=out_file)
+    print(f"Saved {len(projects)} projects to {filename}")
 
 
 def display_projects(projects):
