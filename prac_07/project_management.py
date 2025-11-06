@@ -18,17 +18,17 @@ def main():
     choice = input(">>> ").upper()
     while choice != "Q":
         if choice == "L":
-            load_filename = get_valid_filename("Load file name: ")
+            load_filename = get_valid_input("Load file name: ")
             projects = load_projects(load_filename)
         elif choice == "S":
-            save_filename = get_valid_filename("Save file name: ")
+            save_filename = get_valid_input("Save file name: ")
             save_projects(save_filename, projects)
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
             print()
         elif choice == "A":
-            print()
+            add_project(projects)
         elif choice == "U":
             print()
         else:
@@ -54,11 +54,11 @@ def load_projects(filename=FILENAME):
         print("Specified file does not exist, please try again.")
 
 
-def get_valid_filename(prompt):
+def get_valid_input(prompt):
     """"""
     choice = input(prompt)
-    while choice == "" or "." not in choice:
-        print("Invalid filename")
+    while choice == "":
+        print("Invalid input")
         choice = input(prompt)
     return choice
 
@@ -68,7 +68,8 @@ def save_projects(filename, projects):
     with open(filename, "w") as out_file:
         print(HEADER_LINE, file=out_file)
         for project in projects:
-            project_to_save = [project.name, project.start_date, str(project.priority), str(project.cost_estimate), str(project.completion_percentage)]
+            project_to_save = [project.name, project.start_date, str(project.priority), str(project.cost_estimate),
+                               str(project.completion_percentage)]
             print("\t".join(project_to_save), file=out_file)
     print(f"Saved {len(projects)} projects to {filename}")
 
@@ -85,6 +86,46 @@ def display_projects(projects):
     complete_projects.sort()
     for complete_project in complete_projects:
         print(f"  {complete_project}")
+
+
+def get_valid_number(prompt):
+    """"""
+    is_valid_number = False
+    while not is_valid_number:
+        try:
+            choice = int(input(prompt))
+            if choice < 0:
+                print("Input must be >= 0")
+            else:
+                is_valid_number = True
+        except ValueError:
+            print("Invalid input - must be an integer")
+    return choice
+
+
+def get_valid_float(prompt):
+    """"""
+    is_valid_float = False
+    while not is_valid_float:
+        try:
+            choice = float(input(prompt))
+            if choice < 0:
+                print("Input must be >= 0")
+            else:
+                is_valid_float = True
+        except ValueError:
+            print("Invalid input - must be a float")
+    return choice
+
+
+def add_project(projects):
+    print("Let's add a new project")
+    name = get_valid_input("Name: ")
+    start_date = input("Start date (dd/mm/yy): ")
+    priority = get_valid_number("Priority: ")
+    cost_estimate = get_valid_float("Cost Estimate: $")
+    percentage_complete = get_valid_number("Percent complete: ")
+    projects.append(Project(name, start_date, priority, cost_estimate, percentage_complete))
 
 
 main()
