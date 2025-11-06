@@ -6,7 +6,7 @@ FILENAME = "guitars.csv"
 
 
 def main():
-    """"""
+    """Load guitars from a file, add new guitars, sort them, then save the file."""
     guitars = load_guitars()
     get_new_guitars(guitars)
     guitars.sort()
@@ -40,6 +40,7 @@ def get_new_guitars(guitars):
 
 
 def save_guitars(guitars):
+    """Save guitars to a file."""
     with open(FILENAME, "w") as out_file:
         for guitar in guitars:
             guitar_to_add = [guitar.name, str(guitar.year), str(guitar.cost)]
