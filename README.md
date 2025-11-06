@@ -19,3 +19,8 @@ There are lots of things that I love, but here is an ordered list to make it sim
 1. Jesus Christ
 2. My Family and my Girlfriend
 3. Sport (particularly the Warriors (NBA) and Cricket Australia)
+
+## Cool Links
+
+[Programming Patterns Page](https://github.com/CP1404/Starter/wiki/Programming-Patterns) 
+[CP1404 Practicals](https://github.com/CP1404/Practicals)
