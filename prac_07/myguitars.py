@@ -7,22 +7,43 @@ FILENAME = "guitars.csv"
 
 def main():
     """"""
-    guitars = read_file()
+    guitars = load_guitars()
+    get_new_guitars(guitars)
     guitars.sort()
     for guitar in guitars:
         print(guitar)
+    save_guitars(guitars)
 
 
-def read_file():
+def load_guitars():
     """Read the guitars from a file and save them as a list of objects."""
     guitars = []
     with open(FILENAME, 'r') as in_file:
         for line in in_file:
-            parts = in_file.readline().strip().split(",")
-            year = float(parts[2])
-            guitar = Guitar(parts[0], parts[1], year)
+            parts = line.strip().split(",")
+            print(parts)
+            guitar = Guitar(parts[0], int(parts[1]), float(parts[2]))
             guitars.append(guitar)
     return guitars
+
+
+def get_new_guitars(guitars):
+    """Get new guitars until a blank name is entered."""
+    name = input("Name: ")
+    while name != "":
+        year = int(input("Year: "))
+        cost = float(input("Cost: $"))
+        guitar_to_add = Guitar(name, year, cost)
+        guitars.append(guitar_to_add)
+        print(guitar_to_add.name, "added.")
+        name = input("Name: ")
+
+
+def save_guitars(guitars):
+    with open(FILENAME, "w") as out_file:
+        for guitar in guitars:
+            guitar_to_add = [guitar.name, str(guitar.year), str(guitar.cost)]
+            print(",".join(guitar_to_add), file=out_file)
 
 
 main()
