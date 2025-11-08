@@ -4,6 +4,7 @@ Actual: 3:55 -
 """
 
 from prac_07.project import Project
+import datetime
 
 MENU = "- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter projects by date\n- (A)dd new project\n- (U)pdate project\n- (Q)uit"
 FILENAME = "projects.txt"
@@ -26,7 +27,7 @@ def main():
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
-            print()
+            filter_by_date(projects)
         elif choice == "A":
             add_project(projects)
         elif choice == "U":
@@ -35,7 +36,8 @@ def main():
             print("Invalid input")
         print(MENU)
         choice = input(">>> ").upper()
-    print()
+    print(f"Would you like to save to {FILENAME}? no, I think not.")
+    print("Thank you for using custom-built project management software.")
 
 
 def load_projects(filename=FILENAME):
@@ -46,7 +48,8 @@ def load_projects(filename=FILENAME):
             in_file.readline()  # Ignore header line
             for line in in_file:
                 parts = line.strip("\n").split("\t")
-                project = Project(parts[0], parts[1], int(parts[2]), float(parts[3]), int(parts[4]))
+                project = Project(parts[0], datetime.datetime.strptime(parts[1], "%d/%m/%Y").date(), int(parts[2]),
+                                  float(parts[3]), int(parts[4]))
                 projects.append(project)
         print(f"Loaded {len(projects)} projects from {filename}")
         return projects
@@ -68,7 +71,8 @@ def save_projects(filename, projects):
     with open(filename, "w") as out_file:
         print(HEADER_LINE, file=out_file)
         for project in projects:
-            project_to_save = [project.name, project.start_date, str(project.priority), str(project.cost_estimate),
+            project_to_save = [project.name, project.start_date.strftime("%d/%m/%Y"), str(project.priority),
+                               str(project.cost_estimate),
                                str(project.completion_percentage)]
             print("\t".join(project_to_save), file=out_file)
     print(f"Saved {len(projects)} projects to {filename}")
@@ -152,6 +156,15 @@ def get_new_value(prompt, minimum, maximum):
             print(f"Input must be between {minimum} and {maximum} inclusive.")
             choice = input(prompt)
     return choice
+
+
+def filter_by_date(projects):
+    """"""
+    after_date = datetime.datetime.strptime(get_valid_input("Show projects that start after date (dd/mm/yyyy): "),
+                                            "%d/%m/%Y").date()
+    for project in projects:
+        if project.is_older(after_date):
+            print(project)
 
 
 def update_project(projects):
