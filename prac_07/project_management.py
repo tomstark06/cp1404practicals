@@ -130,7 +130,7 @@ def add_project(projects):
     priority = get_valid_number("Priority: ", 1, 10)
     cost_estimate = get_valid_float("Cost Estimate: $")
     percentage_complete = get_valid_number("Percent complete: ", 0, 100)
-    projects.append(Project(name, start_date, priority, cost_estimate, percentage_complete))
+    projects.append(Project(name, datetime.datetime.strptime(start_date, "%d/%m/%Y").date(), priority, cost_estimate, percentage_complete))
 
 
 def get_valid_index(prompt, projects):
@@ -175,10 +175,10 @@ def update_project(projects):
     print(projects[project_index])
     new_percentage = get_new_number("New Percentage: ", 0, 100)
     if new_percentage != "":
-        projects[project_index].completion_percentage = new_percentage
+        projects[project_index].completion_percentage = int(new_percentage)
     new_priority = get_new_number("New Priority: ", 1, 10)
     if new_priority != "":
-        projects[project_index].completion_percentage = new_priority
+        projects[project_index].priority = int(new_priority)
 
 
 main()
