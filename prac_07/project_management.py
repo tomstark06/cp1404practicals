@@ -1,6 +1,6 @@
 """Project Management Client Side Code.
 Estimate: 60 minutes
-Actual: 3:55 -
+Actual: 2.5 hours over 3 days
 """
 
 from prac_07.project import Project
