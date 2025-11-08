@@ -30,7 +30,7 @@ def main():
         elif choice == "A":
             add_project(projects)
         elif choice == "U":
-            print()
+            update_project(projects)
         else:
             print("Invalid input")
         print(MENU)
@@ -88,14 +88,14 @@ def display_projects(projects):
         print(f"  {complete_project}")
 
 
-def get_valid_number(prompt):
+def get_valid_number(prompt, minimum, maximum):
     """"""
     is_valid_number = False
     while not is_valid_number:
         try:
             choice = int(input(prompt))
-            if choice < 0:
-                print("Input must be >= 0")
+            if choice < minimum or choice > maximum:
+                print(f"Input must be between {minimum} and {maximum} inclusive.")
             else:
                 is_valid_number = True
         except ValueError:
@@ -119,13 +119,53 @@ def get_valid_float(prompt):
 
 
 def add_project(projects):
+    """"""
     print("Let's add a new project")
     name = get_valid_input("Name: ")
     start_date = input("Start date (dd/mm/yy): ")
-    priority = get_valid_number("Priority: ")
+    priority = get_valid_number("Priority: ", 1, 10)
     cost_estimate = get_valid_float("Cost Estimate: $")
-    percentage_complete = get_valid_number("Percent complete: ")
+    percentage_complete = get_valid_number("Percent complete: ", 0, 100)
     projects.append(Project(name, start_date, priority, cost_estimate, percentage_complete))
+
+
+def get_valid_index(prompt, projects):
+    """"""
+    is_valid_index = False
+    while not is_valid_index:
+        try:
+            choice = int(input(prompt))
+            if choice < 0 or choice > (len(projects) - 1):
+                print("Invalid project choice.")
+            else:
+                is_valid_index = True
+        except ValueError:
+            print("Invalid input - must be an integer")
+    return choice
+
+
+def get_new_value(prompt, minimum, maximum):
+    """"""
+    choice = input(prompt)
+    if choice != "":
+        while int(choice) < minimum or int(choice) > maximum:
+            print(f"Input must be between {minimum} and {maximum} inclusive.")
+            choice = input(prompt)
+    return choice
+
+
+def update_project(projects):
+    """"""
+    for i, project in enumerate(projects):
+        print(i, project)
+    project_index = get_valid_index("Project choice: ", projects)
+    print(projects[project_index])
+    new_percentage = get_new_value("New Percentage: ", 0, 100)
+    if new_percentage != "":
+        projects[project_index].completion_percentage = new_percentage
+    new_priority = get_new_value("New Priority: ", 1, 10)
+    if new_priority != "":
+        projects[project_index].completion_percentage = new_priority
 
 
 main()
