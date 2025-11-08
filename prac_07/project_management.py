@@ -12,7 +12,7 @@ HEADER_LINE = "Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage"
 
 
 def main():
-    """"""
+    """Load projects, then alter/display/load projects in different ways, then save and/or quit."""
     print("Welcome to Pythonic Project Management")
     projects = load_projects()
     print(MENU)
@@ -41,7 +41,7 @@ def main():
 
 
 def load_projects(filename=FILENAME):
-    """"""
+    """Load projects from a file."""
     projects = []
     try:
         with open(filename, "r") as in_file:
@@ -58,7 +58,7 @@ def load_projects(filename=FILENAME):
 
 
 def get_valid_input(prompt):
-    """"""
+    """Get a valid input given a prompt."""
     choice = input(prompt)
     while choice == "":
         print("Invalid input")
@@ -67,7 +67,7 @@ def get_valid_input(prompt):
 
 
 def save_projects(filename, projects):
-    """"""
+    """Save projects to a file."""
     with open(filename, "w") as out_file:
         print(HEADER_LINE, file=out_file)
         for project in projects:
@@ -79,7 +79,7 @@ def save_projects(filename, projects):
 
 
 def display_projects(projects):
-    """"""
+    """Display projects, sorted by priority and sectioned as incomplete and complete."""
     print("Incomplete projects:")
     incomplete_projects = [project for project in projects if project.completion_percentage != 100]
     incomplete_projects.sort()
@@ -93,7 +93,7 @@ def display_projects(projects):
 
 
 def get_valid_number(prompt, minimum, maximum):
-    """"""
+    """Get a valid number given a prompt and a maximum and minimum value."""
     is_valid_number = False
     while not is_valid_number:
         try:
@@ -108,7 +108,7 @@ def get_valid_number(prompt, minimum, maximum):
 
 
 def get_valid_float(prompt):
-    """"""
+    """Get a valid float given a prompt."""
     is_valid_float = False
     while not is_valid_float:
         try:
@@ -123,7 +123,7 @@ def get_valid_float(prompt):
 
 
 def add_project(projects):
-    """"""
+    """Add a project to the list of projects"""
     print("Let's add a new project")
     name = get_valid_input("Name: ")
     start_date = input("Start date (dd/mm/yy): ")
@@ -134,7 +134,7 @@ def add_project(projects):
 
 
 def get_valid_index(prompt, projects):
-    """"""
+    """Get a valid index given a prompt."""
     is_valid_index = False
     while not is_valid_index:
         try:
@@ -148,8 +148,8 @@ def get_valid_index(prompt, projects):
     return choice
 
 
-def get_new_value(prompt, minimum, maximum):
-    """"""
+def get_new_number(prompt, minimum, maximum):
+    """Get a new number given a minimum and maximum number"""
     choice = input(prompt)
     if choice != "":
         while int(choice) < minimum or int(choice) > maximum:
@@ -159,7 +159,7 @@ def get_new_value(prompt, minimum, maximum):
 
 
 def filter_by_date(projects):
-    """"""
+    """Filter projects after a user inputted date."""
     after_date = datetime.datetime.strptime(get_valid_input("Show projects that start after date (dd/mm/yyyy): "),
                                             "%d/%m/%Y").date()
     for project in projects:
@@ -168,15 +168,15 @@ def filter_by_date(projects):
 
 
 def update_project(projects):
-    """"""
+    """Update a project's priority and/or completion percentage."""
     for i, project in enumerate(projects):
         print(i, project)
     project_index = get_valid_index("Project choice: ", projects)
     print(projects[project_index])
-    new_percentage = get_new_value("New Percentage: ", 0, 100)
+    new_percentage = get_new_number("New Percentage: ", 0, 100)
     if new_percentage != "":
         projects[project_index].completion_percentage = new_percentage
-    new_priority = get_new_value("New Priority: ", 1, 10)
+    new_priority = get_new_number("New Priority: ", 1, 10)
     if new_priority != "":
         projects[project_index].completion_percentage = new_priority
 
