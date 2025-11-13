@@ -6,27 +6,31 @@ MILES_TO_KM_CONVERSION_RATE = 1.609344
 
 
 class ConvertMilesKm(App):
-    number_input = StringProperty()
-    number_output = StringProperty()
+    """Kivy App for converting miles to kilometres."""
+    miles_input = StringProperty()
+    kilometres_output = StringProperty()
 
     def build(self):
+        """Build Kivy app."""
         self.title = "Convert Miles to Kilometres"
         self.root = Builder.load_file("convert_miles_km.kv")
         return self.root
 
     def handle_convert(self):
+        """Convert the inputted miles value to kilometres."""
         try:
-            kilometres = float(self.root.ids.user_input.text) * MILES_TO_KM_CONVERSION_RATE
+            kilometres = float(self.root.ids.miles_input.text) * MILES_TO_KM_CONVERSION_RATE
         except ValueError:
             kilometres = 0.0
-        self.number_output = str(kilometres)
+        self.kilometres_output = str(kilometres)
 
-    def handle_increment(self, value):
-        if self.root.ids.user_input.text == "":
-            number = 0 + value
+    def handle_increment(self, increment):
+        """Increment the input value by a given increment."""
+        if self.root.ids.miles_input.text == "":
+            number = 0 + increment
         else:
-            number = int(self.root.ids.user_input.text) + value
-        self.number_input = str(number)
+            number = int(self.root.ids.miles_input.text) + increment
+        self.miles_input = str(number)
 
 
 ConvertMilesKm().run()
