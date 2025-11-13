@@ -5,7 +5,7 @@ from kivy.properties import StringProperty
 MILES_TO_KM_CONVERSION_RATE = 1.609344
 
 
-class ConvertMilesKm(App):
+class ConvertMilesKmApp(App):
     """Kivy App for converting miles to kilometres."""
     miles_input = StringProperty()
     kilometres_output = StringProperty()
