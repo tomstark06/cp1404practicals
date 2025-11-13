@@ -15,11 +15,17 @@ class ConvertMilesKm(App):
         return self.root
 
     def handle_convert(self):
-        kilometres = float(self.root.ids.user_input.text) * MILES_TO_KM_CONVERSION_RATE
+        try:
+            kilometres = float(self.root.ids.user_input.text) * MILES_TO_KM_CONVERSION_RATE
+        except ValueError:
+            kilometres = 0.0
         self.number_output = str(kilometres)
 
     def handle_increment(self, value):
-        number = int(self.root.ids.user_input.text) + value
+        if self.root.ids.user_input.text == "":
+            number = 0 + value
+        else:
+            number = int(self.root.ids.user_input.text) + value
         self.number_input = str(number)
 
 

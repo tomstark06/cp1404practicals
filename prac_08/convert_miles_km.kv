@@ -7,18 +7,19 @@ BoxLayout:
             text: app.number_input
             size_hint_x: 0.75
             multiline: False
+            on_text: app.handle_convert()
         BoxLayout:
             orientation: 'vertical'
             size_hint_x: 0.25
             Button:
                 text: 'Up'
-                on_press: app.handle_increment(1)
+                on_press: app.handle_increment(1), app.handle_convert()
             Button:
                 text: 'Down'
-                on_press: app.handle_increment(-1)
-    Button:
-        text: 'Convert miles to km'
-        on_press: app.handle_convert()
+                on_press: app.handle_increment(-1), app.handle_convert()
+#    Button:
+#        text: 'Convert miles to km'
+#        on_press: app.handle_convert()
     Label:
         id: conversion_output
         text: app.number_output
