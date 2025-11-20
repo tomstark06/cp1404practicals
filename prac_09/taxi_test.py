@@ -1,4 +1,4 @@
-"""Taxi class test code"""
+"""Taxi class test code."""
 
 from prac_09.taxi import Taxi
 
