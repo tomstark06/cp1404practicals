@@ -9,7 +9,7 @@ def run_tests():
     silver_service_taxi.drive(18)
     print(silver_service_taxi)
     print(f"Total Fare: ${silver_service_taxi.get_fare()}")
-    assert silver_service_taxi.get_fare() == 48.78
+    assert silver_service_taxi.get_fare() == 48.80
 
 
 run_tests()
