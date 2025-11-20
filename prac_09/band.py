@@ -10,7 +10,7 @@ class Band:
 
     def __str__(self):
         """Return a formatted string of a Band instance."""
-        return f"{self.name} ({self.musicians})"  # Could not figure out how to remove the list brackets
+        return f"{self.name} ({",".join([str(musician) for musician in self.musicians])})"
 
     def add(self, musician):
         """Add a member to the band."""
@@ -18,6 +18,4 @@ class Band:
 
     def play(self):
         """Print the result of the band playing."""
-        for musician in self.musicians:
-            print(musician.play())
-        return ""  # Not sure if this solution is correct or not
+        return "\n".join([musician.play() for musician in self.musicians])
