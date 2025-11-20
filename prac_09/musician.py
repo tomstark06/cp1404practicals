@@ -15,7 +15,7 @@ class Musician:
 
     def __repr__(self):
         """Return a string representation of a Musician, showing the variables."""
-        return str(vars(self))
+        return f"{self.name} ({self.instruments})"
 
     def add(self, instrument):
         """Add an instrument to musician's collection."""
